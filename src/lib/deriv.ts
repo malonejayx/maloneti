@@ -112,9 +112,10 @@ export class DerivClient {
       handler(first);
     });
     return () => {
-      if (subId) {
-        this.send({ forget: subId });
-        this.subs.delete(subId);
+      const id = subId;
+      if (id) {
+        this.send({ forget: id });
+        this.subs.delete(id);
       }
     };
   }
