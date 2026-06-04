@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedPurchasesRouteImport } from './routes/_authenticated/purchases'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCheckoutTypeIdRouteImport } from './routes/_authenticated/checkout.$type.$id'
 
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPurchasesRoute = AuthenticatedPurchasesRouteImport.update({
+  id: '/purchases',
+  path: '/purchases',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -45,12 +51,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/purchases': typeof AuthenticatedPurchasesRoute
   '/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/purchases': typeof AuthenticatedPurchasesRoute
   '/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
 export interface FileRoutesById {
@@ -59,19 +67,21 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/purchases': typeof AuthenticatedPurchasesRoute
   '/_authenticated/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/checkout/$type/$id'
+  fullPaths: '/' | '/auth' | '/dashboard' | '/purchases' | '/checkout/$type/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/checkout/$type/$id'
+  to: '/' | '/auth' | '/dashboard' | '/purchases' | '/checkout/$type/$id'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/purchases'
     | '/_authenticated/checkout/$type/$id'
   fileRoutesById: FileRoutesById
 }
@@ -104,6 +114,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/purchases': {
+      id: '/_authenticated/purchases'
+      path: '/purchases'
+      fullPath: '/purchases'
+      preLoaderRoute: typeof AuthenticatedPurchasesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -123,11 +140,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedPurchasesRoute: typeof AuthenticatedPurchasesRoute
   AuthenticatedCheckoutTypeIdRoute: typeof AuthenticatedCheckoutTypeIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedPurchasesRoute: AuthenticatedPurchasesRoute,
   AuthenticatedCheckoutTypeIdRoute: AuthenticatedCheckoutTypeIdRoute,
 }
 
