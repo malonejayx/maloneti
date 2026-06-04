@@ -105,9 +105,10 @@ export class DerivClient {
   subscribe(payload: Record<string, any>, handler: Handler) {
     let subId: string | null = null;
     this.send({ ...payload, subscribe: 1 }).then((first: any) => {
-      if (first.subscription?.id) {
-        subId = first.subscription.id;
-        this.subs.set(subId, handler);
+      const id: string | undefined = first.subscription?.id;
+      if (id) {
+        subId = id;
+        this.subs.set(id, handler);
       }
       handler(first);
     });
