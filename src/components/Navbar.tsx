@@ -25,6 +25,7 @@ export function Navbar() {
         <nav className="flex items-center gap-3 md:gap-8 text-xs md:text-sm">
           <Link to="/" className="text-muted-foreground hover:text-foreground">Home</Link>
           {user && <Link to="/dashboard" className="text-muted-foreground hover:text-foreground">Dashboard</Link>}
+          {user && <Link to="/terminal" className="text-primary hover:opacity-80">Terminal</Link>}
           {user && <Link to="/purchases" className="hidden sm:inline text-muted-foreground hover:text-foreground">Orders</Link>}
           {isAdmin && (
             <Link to="/admin" className="flex items-center gap-1 text-primary hover:opacity-80">

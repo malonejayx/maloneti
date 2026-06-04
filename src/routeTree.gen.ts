@@ -15,6 +15,8 @@ import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DerivCallbackRouteImport } from './routes/deriv.callback'
+import { Route as AuthenticatedTerminalRouteImport } from './routes/_authenticated/terminal'
 import { Route as AuthenticatedPurchasesRouteImport } from './routes/_authenticated/purchases'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -49,6 +51,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DerivCallbackRoute = DerivCallbackRouteImport.update({
+  id: '/deriv/callback',
+  path: '/deriv/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedTerminalRoute = AuthenticatedTerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPurchasesRoute = AuthenticatedPurchasesRouteImport.update({
   id: '/purchases',
   path: '/purchases',
@@ -80,6 +92,8 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/purchases': typeof AuthenticatedPurchasesRoute
+  '/terminal': typeof AuthenticatedTerminalRoute
+  '/deriv/callback': typeof DerivCallbackRoute
   '/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
 export interface FileRoutesByTo {
@@ -91,6 +105,8 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/purchases': typeof AuthenticatedPurchasesRoute
+  '/terminal': typeof AuthenticatedTerminalRoute
+  '/deriv/callback': typeof DerivCallbackRoute
   '/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
 export interface FileRoutesById {
@@ -104,6 +120,8 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/purchases': typeof AuthenticatedPurchasesRoute
+  '/_authenticated/terminal': typeof AuthenticatedTerminalRoute
+  '/deriv/callback': typeof DerivCallbackRoute
   '/_authenticated/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
 export interface FileRouteTypes {
@@ -117,6 +135,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/purchases'
+    | '/terminal'
+    | '/deriv/callback'
     | '/checkout/$type/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -128,6 +148,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/purchases'
+    | '/terminal'
+    | '/deriv/callback'
     | '/checkout/$type/$id'
   id:
     | '__root__'
@@ -140,6 +162,8 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/_authenticated/purchases'
+    | '/_authenticated/terminal'
+    | '/deriv/callback'
     | '/_authenticated/checkout/$type/$id'
   fileRoutesById: FileRoutesById
 }
@@ -150,6 +174,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  DerivCallbackRoute: typeof DerivCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -196,6 +221,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/deriv/callback': {
+      id: '/deriv/callback'
+      path: '/deriv/callback'
+      fullPath: '/deriv/callback'
+      preLoaderRoute: typeof DerivCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/terminal': {
+      id: '/_authenticated/terminal'
+      path: '/terminal'
+      fullPath: '/terminal'
+      preLoaderRoute: typeof AuthenticatedTerminalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/purchases': {
       id: '/_authenticated/purchases'
       path: '/purchases'
@@ -231,6 +270,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedPurchasesRoute: typeof AuthenticatedPurchasesRoute
+  AuthenticatedTerminalRoute: typeof AuthenticatedTerminalRoute
   AuthenticatedCheckoutTypeIdRoute: typeof AuthenticatedCheckoutTypeIdRoute
 }
 
@@ -238,6 +278,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedPurchasesRoute: AuthenticatedPurchasesRoute,
+  AuthenticatedTerminalRoute: AuthenticatedTerminalRoute,
   AuthenticatedCheckoutTypeIdRoute: AuthenticatedCheckoutTypeIdRoute,
 }
 
@@ -251,17 +292,8 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  DerivCallbackRoute: DerivCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
