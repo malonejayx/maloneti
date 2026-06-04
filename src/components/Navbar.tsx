@@ -22,12 +22,12 @@ export function Navbar() {
           </div>
           <span className="font-display text-lg font-bold tracking-tight">ApexFX</span>
         </Link>
-        <nav className="hidden items-center gap-8 md:flex">
-          <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">Home</Link>
-          {user && <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground">Dashboard</Link>}
-          {user && <Link to="/purchases" className="text-sm text-muted-foreground hover:text-foreground">My Orders</Link>}
+        <nav className="flex items-center gap-3 md:gap-8 text-xs md:text-sm">
+          <Link to="/" className="text-muted-foreground hover:text-foreground">Home</Link>
+          {user && <Link to="/dashboard" className="text-muted-foreground hover:text-foreground">Dashboard</Link>}
+          {user && <Link to="/purchases" className="hidden sm:inline text-muted-foreground hover:text-foreground">Orders</Link>}
           {isAdmin && (
-            <Link to="/admin" className="flex items-center gap-1 text-sm text-primary hover:opacity-80">
+            <Link to="/admin" className="flex items-center gap-1 text-primary hover:opacity-80">
               <Shield className="h-4 w-4" /> Admin
             </Link>
           )}
