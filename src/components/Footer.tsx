@@ -1,4 +1,9 @@
 import { Link } from "@tanstack/react-router";
+import { Mail, Phone, MessageCircle } from "lucide-react";
+
+const SUPPORT_EMAIL = "justiceforiran653@gmail.com";
+const SUPPORT_PHONE = "+254746496906";
+const WHATSAPP_LINK = "https://wa.me/254746496906";
 
 export function Footer() {
   return (
@@ -16,14 +21,33 @@ export function Footer() {
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link to="/dashboard" className="hover:text-foreground">Trading Bots</Link></li>
               <li><Link to="/dashboard" className="hover:text-foreground">Forex Course</Link></li>
+              <li><Link to="/terminal" className="hover:text-foreground">Live Terminal</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold">Legal</h4>
+            <h4 className="text-sm font-semibold">Contact</h4>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-foreground">Terms of Service</Link></li>
-              <li><Link to="/cookies" className="hover:text-foreground">Cookie Policy</Link></li>
+              <li>
+                <a href={`mailto:${SUPPORT_EMAIL}`} className="inline-flex items-center gap-2 hover:text-foreground">
+                  <Mail className="h-3.5 w-3.5" /> {SUPPORT_EMAIL}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${SUPPORT_PHONE}`} className="inline-flex items-center gap-2 hover:text-foreground">
+                  <Phone className="h-3.5 w-3.5" /> {SUPPORT_PHONE}
+                </a>
+              </li>
+              <li>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground">
+                  <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
+                </a>
+              </li>
+            </ul>
+            <h4 className="mt-4 text-sm font-semibold">Legal</h4>
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/privacy" className="hover:text-foreground">Privacy</Link></li>
+              <li><Link to="/terms" className="hover:text-foreground">Terms</Link></li>
+              <li><Link to="/cookies" className="hover:text-foreground">Cookies</Link></li>
             </ul>
           </div>
         </div>
