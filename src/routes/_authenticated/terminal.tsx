@@ -240,6 +240,12 @@ function Terminal() {
               {balance ? `${balance.balance.toFixed(2)} ${balance.currency}` : "…"}
             </span>
           </div>
+          <Button variant="outline" size="sm" onClick={() => openCashier("deposit")}>
+            <ArrowDownToLine className="mr-1 h-4 w-4" /> Deposit
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => openCashier("withdraw")}>
+            <ArrowUpFromLine className="mr-1 h-4 w-4" /> Withdraw
+          </Button>
           <Button variant="ghost" size="sm" onClick={disconnect}>
             <LogOut className="mr-1 h-4 w-4" /> Disconnect
           </Button>
