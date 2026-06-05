@@ -20,7 +20,7 @@ function PrivacyPage() {
           <Block title="3. Payment information">ApexFX does not store card or bank details. Payments are sent directly to our I&amp;M Bank account; we only store the reference code you submit so our team can verify the transfer.</Block>
           <Block title="4. Data sharing">We do not sell your data. We share data only with infrastructure providers necessary to run the service and when required by law.</Block>
           <Block title="5. Your rights">You may request access, correction, or deletion of your personal data at any time by contacting support.</Block>
-          <Block title="6. Contact">For privacy questions, email <span className="text-primary">privacy@apexfx.example</span>.</Block>
+          <Block title="6. Contact">For privacy questions, email <a className="text-primary" href="mailto:justiceforiran653@gmail.com">justiceforiran653@gmail.com</a> or call <a className="text-primary" href="tel:+254746496906">+254 746 496 906</a>.</Block>
         </div>
       </div>
       <Footer />

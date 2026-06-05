@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { TrendingUp, TrendingDown, LogOut, Activity, Wallet } from "lucide-react";
+import { TrendingUp, TrendingDown, LogOut, Activity, Wallet, ArrowDownToLine, ArrowUpFromLine } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/terminal")({
   ssr: false,
@@ -176,6 +176,21 @@ function Terminal() {
     }
   };
 
+  const openCashier = async (provider: "deposit" | "withdraw") => {
+    if (!active) return;
+    try {
+      const client = getDerivClient();
+      const res = await client.send({ cashier: provider, provider: "doughflow" });
+      if (res.error) throw new Error(res.error.message);
+      const url = typeof res.cashier === "string" ? res.cashier : res.cashier?.url;
+      if (!url) throw new Error("No cashier URL returned");
+      window.open(url, "_blank", "noopener,noreferrer");
+      toast.success(`${provider === "deposit" ? "Deposit" : "Withdrawal"} page opened in a new tab`);
+    } catch (e: any) {
+      toast.error(e.message || "Cashier unavailable. Complete KYC on your Deriv account first.");
+    }
+  };
+
   if (!active) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-20">
@@ -225,6 +240,12 @@ function Terminal() {
               {balance ? `${balance.balance.toFixed(2)} ${balance.currency}` : "…"}
             </span>
           </div>
+          <Button variant="outline" size="sm" onClick={() => openCashier("deposit")}>
+            <ArrowDownToLine className="mr-1 h-4 w-4" /> Deposit
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => openCashier("withdraw")}>
+            <ArrowUpFromLine className="mr-1 h-4 w-4" /> Withdraw
+          </Button>
           <Button variant="ghost" size="sm" onClick={disconnect}>
             <LogOut className="mr-1 h-4 w-4" /> Disconnect
           </Button>
