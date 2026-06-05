@@ -24,7 +24,7 @@ function CookiesPage() {
           </Block>
           <Block title="Third-party cookies">We do not use advertising or cross-site tracking cookies. Our hosting and authentication providers may set strictly-necessary cookies as part of operating the service.</Block>
           <Block title="Managing cookies">You can clear cookies in your browser settings at any time. Disabling essential cookies will prevent you from signing in to your ApexFX account.</Block>
-          <Block title="Contact">Questions? Email <span className="text-primary">privacy@apexfx.example</span>.</Block>
+          <Block title="Contact">Questions? Email <a className="text-primary" href="mailto:justiceforiran653@gmail.com">justiceforiran653@gmail.com</a> or call <a className="text-primary" href="tel:+254746496906">+254 746 496 906</a>.</Block>
         </div>
       </div>
       <Footer />
