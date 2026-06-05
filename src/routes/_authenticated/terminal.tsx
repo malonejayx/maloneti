@@ -176,6 +176,21 @@ function Terminal() {
     }
   };
 
+  const openCashier = async (provider: "deposit" | "withdraw") => {
+    if (!active) return;
+    try {
+      const client = getDerivClient();
+      const res = await client.send({ cashier: provider, provider: "doughflow" });
+      if (res.error) throw new Error(res.error.message);
+      const url = typeof res.cashier === "string" ? res.cashier : res.cashier?.url;
+      if (!url) throw new Error("No cashier URL returned");
+      window.open(url, "_blank", "noopener,noreferrer");
+      toast.success(`${provider === "deposit" ? "Deposit" : "Withdrawal"} page opened in a new tab`);
+    } catch (e: any) {
+      toast.error(e.message || "Cashier unavailable. Complete KYC on your Deriv account first.");
+    }
+  };
+
   if (!active) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-20">
