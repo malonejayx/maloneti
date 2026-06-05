@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { TrendingUp, TrendingDown, LogOut, Activity, Wallet } from "lucide-react";
+import { TrendingUp, TrendingDown, LogOut, Activity, Wallet, ArrowDownToLine, ArrowUpFromLine } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/terminal")({
   ssr: false,
