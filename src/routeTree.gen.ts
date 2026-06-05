@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DerivCallbackRouteImport } from './routes/deriv.callback'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedTerminalRouteImport } from './routes/_authenticated/terminal'
 import { Route as AuthenticatedPurchasesRouteImport } from './routes/_authenticated/purchases'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -56,6 +57,11 @@ const DerivCallbackRoute = DerivCallbackRouteImport.update({
   path: '/deriv/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedTerminalRoute = AuthenticatedTerminalRouteImport.update({
   id: '/terminal',
   path: '/terminal',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/purchases': typeof AuthenticatedPurchasesRoute
   '/terminal': typeof AuthenticatedTerminalRoute
+  '/api/chat': typeof ApiChatRoute
   '/deriv/callback': typeof DerivCallbackRoute
   '/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/purchases': typeof AuthenticatedPurchasesRoute
   '/terminal': typeof AuthenticatedTerminalRoute
+  '/api/chat': typeof ApiChatRoute
   '/deriv/callback': typeof DerivCallbackRoute
   '/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/purchases': typeof AuthenticatedPurchasesRoute
   '/_authenticated/terminal': typeof AuthenticatedTerminalRoute
+  '/api/chat': typeof ApiChatRoute
   '/deriv/callback': typeof DerivCallbackRoute
   '/_authenticated/checkout/$type/$id': typeof AuthenticatedCheckoutTypeIdRoute
 }
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/purchases'
     | '/terminal'
+    | '/api/chat'
     | '/deriv/callback'
     | '/checkout/$type/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/purchases'
     | '/terminal'
+    | '/api/chat'
     | '/deriv/callback'
     | '/checkout/$type/$id'
   id:
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/purchases'
     | '/_authenticated/terminal'
+    | '/api/chat'
     | '/deriv/callback'
     | '/_authenticated/checkout/$type/$id'
   fileRoutesById: FileRoutesById
@@ -174,6 +186,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  ApiChatRoute: typeof ApiChatRoute
   DerivCallbackRoute: typeof DerivCallbackRoute
 }
 
@@ -226,6 +239,13 @@ declare module '@tanstack/react-router' {
       path: '/deriv/callback'
       fullPath: '/deriv/callback'
       preLoaderRoute: typeof DerivCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/terminal': {
@@ -292,6 +312,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  ApiChatRoute: ApiChatRoute,
   DerivCallbackRoute: DerivCallbackRoute,
 }
 export const routeTree = rootRouteImport
