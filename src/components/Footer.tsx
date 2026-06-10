@@ -23,6 +23,12 @@ export function Footer() {
               <li><Link to="/dashboard" className="hover:text-foreground">Forex Course</Link></li>
               <li><Link to="/terminal" className="hover:text-foreground">Live Terminal</Link></li>
             </ul>
+            <h4 className="mt-4 text-sm font-semibold">Company</h4>
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/about" className="hover:text-foreground">About</Link></li>
+              <li><Link to="/faq" className="hover:text-foreground">FAQ</Link></li>
+              <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+            </ul>
           </div>
           <div>
             <h4 className="text-sm font-semibold">Contact</h4>
@@ -45,6 +51,7 @@ export function Footer() {
             </ul>
             <h4 className="mt-4 text-sm font-semibold">Legal</h4>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/risk" className="hover:text-foreground">Risk Disclosure</Link></li>
               <li><Link to="/privacy" className="hover:text-foreground">Privacy</Link></li>
               <li><Link to="/terms" className="hover:text-foreground">Terms</Link></li>
               <li><Link to="/cookies" className="hover:text-foreground">Cookies</Link></li>

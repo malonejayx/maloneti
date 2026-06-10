@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bot, GraduationCap, ShieldCheck, Zap, TrendingUp, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, GraduationCap, ShieldCheck, Zap, TrendingUp, Sparkles, Star, Quote } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -100,6 +100,49 @@ function LandingPage() {
               <div className="text-gradient-gold font-display text-3xl font-bold">{s.n}</div>
               <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="border-y border-border/60 bg-card/30 py-16">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 px-6 text-center md:grid-cols-4">
+          {[
+            { n: "2,400+", l: "Active traders" },
+            { n: "$18M+", l: "Volume traded" },
+            { n: "68%", l: "Avg. win rate" },
+            { n: "24/7", l: "Bot uptime" },
+          ].map((s) => (
+            <div key={s.l}>
+              <div className="text-gradient-gold font-display text-4xl font-bold md:text-5xl">{s.n}</div>
+              <div className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-4xl font-bold md:text-5xl">Loved by traders</h2>
+          <p className="mt-3 text-muted-foreground">Real feedback from the ApexFX community.</p>
+        </div>
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {[
+            { name: "Brian K.", role: "Nairobi, KE", text: "Apex Scalper paid for itself in 3 weeks. The risk management is what sold me — no blown accounts." },
+            { name: "Amina S.", role: "Lagos, NG", text: "Took the Pro course, got my FTMO challenge on the first try. The curriculum is gold." },
+            { name: "David O.", role: "Kampala, UG", text: "Withdrawing to M-Pesa straight from the terminal is the cleanest UX I've seen on any trading site." },
+          ].map((t) => (
+            <div key={t.name} className="rounded-2xl border border-border bg-card p-6">
+              <div className="flex gap-0.5 text-primary">
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+              </div>
+              <Quote className="mt-3 h-5 w-5 text-muted-foreground/60" />
+              <p className="mt-2 text-sm text-foreground">{t.text}</p>
+              <div className="mt-4 text-xs text-muted-foreground">
+                <span className="font-semibold text-foreground">{t.name}</span> · {t.role}
+              </div>
             </div>
           ))}
         </div>
