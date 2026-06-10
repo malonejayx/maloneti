@@ -12,7 +12,7 @@ const FAQS = [
   { q: "Is this regulated?", a: "ApexFX provides software and education only. Live trading executes through Deriv, which is licensed by the Malta Financial Services Authority, the British Virgin Islands FSC, and other regulators." },
   { q: "What is the risk?", a: "Forex and CFD trading carries substantial risk and can result in loss of your entire capital. Read our full Risk Disclosure before depositing real funds." },
   { q: "Can I get a refund?", a: "Digital products (bots and courses) are non-refundable once access is granted. If a bot is found to be defective we will repair or replace it free of charge." },
-  { q: "How do I get support?", a: "WhatsApp +254 746 496 906, email justiceforiran653@gmail.com, or use the in-app Apex Assistant chat at the bottom-right of every page." },
+  { q: "How do I get support?", a: "WhatsApp +254 783 719 920, email apexfxbot@gmail.com, or use the in-app Apex Assistant chat at the bottom-right of every page." },
 ];
 
 export const Route = createFileRoute("/faq")({

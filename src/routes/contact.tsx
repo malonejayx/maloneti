@@ -3,9 +3,9 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
 
-const EMAIL = "justiceforiran653@gmail.com";
-const PHONE = "+254746496906";
-const WA = "https://wa.me/254746496906";
+const EMAIL = "apexfxbot@gmail.com";
+const PHONE = "+254783719920";
+const WA = "https://wa.me/254783719920";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -32,12 +32,12 @@ function ContactPage() {
           <a href={WA} target="_blank" rel="noreferrer" className="group rounded-2xl border border-border bg-card p-6 hover:border-primary">
             <MessageCircle className="h-6 w-6 text-primary" />
             <div className="mt-3 font-semibold">WhatsApp</div>
-            <div className="mt-1 text-sm text-muted-foreground group-hover:text-foreground">+254 746 496 906</div>
+            <div className="mt-1 text-sm text-muted-foreground group-hover:text-foreground">+254 783 719 920</div>
           </a>
           <a href={`tel:${PHONE}`} className="group rounded-2xl border border-border bg-card p-6 hover:border-primary">
             <Phone className="h-6 w-6 text-primary" />
             <div className="mt-3 font-semibold">Phone</div>
-            <div className="mt-1 text-sm text-muted-foreground group-hover:text-foreground">+254 746 496 906</div>
+            <div className="mt-1 text-sm text-muted-foreground group-hover:text-foreground">+254 783 719 920</div>
           </a>
           <a href={`mailto:${EMAIL}`} className="group rounded-2xl border border-border bg-card p-6 hover:border-primary">
             <Mail className="h-6 w-6 text-primary" />
