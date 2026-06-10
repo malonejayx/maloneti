@@ -10,7 +10,7 @@ ABOUT APEXFX:
 - Logged-in users get a Dashboard, an Orders page, and a live Deriv Trading Terminal at /terminal (Rise/Fall contracts, real-time tick chart, account switching, open positions).
 - Users sign in / sign up at /auth (email + password, Google login supported).
 - Legal pages: /privacy, /terms, /cookies.
-- Contact: email justiceforiran653@gmail.com, phone/WhatsApp +254 746 496 906.
+- Contact: email apexfxbot@gmail.com, phone/WhatsApp +254 783 719 920.
 
 HOW IT WORKS (3 steps):
 1. Pick a bot or course from the dashboard.

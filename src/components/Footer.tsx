@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 
-const SUPPORT_EMAIL = "justiceforiran653@gmail.com";
-const SUPPORT_PHONE = "+254746496906";
-const WHATSAPP_LINK = "https://wa.me/254746496906";
+const SUPPORT_EMAIL = "apexfxbot@gmail.com";
+const SUPPORT_PHONE = "+254783719920";
+const WHATSAPP_LINK = "https://wa.me/254783719920";
 
 export function Footer() {
   return (
