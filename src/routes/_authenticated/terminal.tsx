@@ -329,6 +329,103 @@ function Terminal() {
   );
 }
 
+function ConnectScreen({ onConnected }: { onConnected: (accs: DerivAccount[]) => void }) {
+  const [token, setToken] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const connectWithToken = async () => {
+    const t = token.trim();
+    if (!t) { toast.error("Paste your Deriv API token"); return; }
+    setLoading(true);
+    try {
+      const client = getDerivClient();
+      const auth = await client.send({ authorize: t });
+      if (auth.error) throw new Error(auth.error.message);
+      const main = auth.authorize;
+      const list: DerivAccount[] = [
+        { account: main.loginid, token: t, currency: main.currency || "USD" },
+      ];
+      storeAccounts(list);
+      setActiveAccount(main.loginid);
+      toast.success(`Connected as ${main.loginid}`);
+      onConnected(list);
+    } catch (e: any) {
+      toast.error(e.message || "Invalid token");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="relative min-h-[80vh] overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div className="absolute -top-32 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-gold-gradient opacity-20 blur-3xl" />
+      <div className="relative mx-auto max-w-2xl px-6 py-16">
+        <div className="rounded-3xl border border-border bg-card/80 p-10 backdrop-blur glow-gold">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-gradient">
+            <Activity className="h-8 w-8 text-primary-foreground" />
+          </div>
+          <h1 className="mt-6 text-center font-display text-4xl font-bold">
+            Connect <span className="text-gradient-gold">Deriv</span>
+          </h1>
+          <p className="mx-auto mt-3 max-w-md text-center text-sm text-muted-foreground">
+            Paste your Deriv API token once — we'll save it on this device so you never have to sign in again.
+          </p>
+
+          <div className="mt-8 space-y-3">
+            <Label htmlFor="apitoken">Deriv API token</Label>
+            <Input
+              id="apitoken"
+              type="password"
+              placeholder="e.g. a1b2C3d4E5f6G7h8"
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              autoComplete="off"
+            />
+            <Button
+              size="lg"
+              disabled={loading}
+              onClick={connectWithToken}
+              className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90"
+            >
+              {loading ? "Connecting…" : "Connect & save"}
+            </Button>
+            <p className="text-xs text-muted-foreground">
+              Get a token at{" "}
+              <a
+                className="text-primary underline"
+                href="https://app.deriv.com/account/api-token"
+                target="_blank"
+                rel="noreferrer"
+              >
+                app.deriv.com/account/api-token
+              </a>
+              {" "}— enable <em>Read</em>, <em>Trade</em>, and <em>Payments</em> scopes.
+            </p>
+          </div>
+
+          <div className="my-8 flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
+            <div className="h-px flex-1 bg-border" /> or <div className="h-px flex-1 bg-border" />
+          </div>
+
+          <a href={loginUrl()} className="block">
+            <Button variant="outline" size="lg" className="w-full">
+              Sign in with Deriv (OAuth)
+            </Button>
+          </a>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            No Deriv account?{" "}
+            <a className="text-primary underline" href="https://deriv.com/signup/" target="_blank" rel="noreferrer">
+              Create one free
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function TickChart({ ticks, up }: { ticks: Tick[]; up: boolean }) {
   const { path, area, min, max } = useMemo(() => {
     if (ticks.length < 2) return { path: "", area: "", min: 0, max: 0 };
