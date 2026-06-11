@@ -5,6 +5,7 @@ import {
   getActiveAccount,
   getStoredAccounts,
   setActiveAccount,
+  storeAccounts,
   clearAccounts,
   loginUrl,
   type DerivAccount,
