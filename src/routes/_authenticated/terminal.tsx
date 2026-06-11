@@ -193,49 +193,7 @@ function Terminal() {
   };
 
   if (!active) {
-    return (
-      <div className="relative min-h-[80vh] overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <div className="absolute -top-32 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-gold-gradient opacity-20 blur-3xl" />
-        <div className="relative mx-auto max-w-2xl px-6 py-20">
-          <div className="rounded-3xl border border-border bg-card/80 p-10 text-center backdrop-blur glow-gold">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-gradient">
-              <Activity className="h-8 w-8 text-primary-foreground" />
-            </div>
-            <h1 className="mt-6 font-display text-4xl font-bold">
-              Connect <span className="text-gradient-gold">Deriv</span>
-            </h1>
-            <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-              Trade Forex, indices and synthetics live — right here on ApexFX. We'll redirect to Deriv to authorize, then bring you straight back.
-            </p>
-
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-border bg-background/40 p-4 text-left">
-                <div className="text-xs uppercase tracking-wider text-muted-foreground">Step 1</div>
-                <div className="mt-1 text-sm font-semibold">Click Sign in</div>
-              </div>
-              <div className="rounded-xl border border-border bg-background/40 p-4 text-left">
-                <div className="text-xs uppercase tracking-wider text-muted-foreground">Step 2</div>
-                <div className="mt-1 text-sm font-semibold">Authorize on Deriv</div>
-              </div>
-              <div className="rounded-xl border border-primary/40 bg-primary/10 p-4 text-left">
-                <div className="text-xs uppercase tracking-wider text-primary">Step 3</div>
-                <div className="mt-1 text-sm font-semibold">Trade on ApexFX</div>
-              </div>
-            </div>
-
-            <a href={loginUrl()}>
-              <Button size="lg" className="mt-8 bg-gold-gradient text-primary-foreground hover:opacity-90">
-                Sign in with Deriv
-              </Button>
-            </a>
-            <p className="mt-4 text-xs text-muted-foreground">
-              No Deriv account? <a className="text-primary underline" href="https://deriv.com/signup/" target="_blank" rel="noreferrer">Create one free</a>.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    return <ConnectScreen onConnected={(accs) => { setAccounts(accs); setActive(accs[0]); }} />;
   }
 
   return (
